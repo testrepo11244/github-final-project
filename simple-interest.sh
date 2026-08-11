@@ -1,33 +1,29 @@
 #!/bin/bash
 
 # Simple Interest Calculator
-# Formula: Simple Interest = (Principal * Rate * Time) / 100
+# This script calculates simple interest based on user input for principal, rate of interest, and time period.
 
 echo "Simple Interest Calculator"
 echo "---------------------------"
 
 # Read principal amount
-read -p "Enter the principal amount: " principal
+read -p "Enter the principal amount (in dollars): " principal
 
-# Read annual rate of interest
+# Read rate of interest
 read -p "Enter the annual rate of interest (in %): " rate
 
 # Read time period in years
 read -p "Enter the time period (in years): " time
 
-# Validate inputs (basic numeric check)
-if ! [[ "$principal" =~ ^[0-9]+(\.[0-9]+)?$ ]] || ! [[ "$rate" =~ ^[0-9]+(\.[0-9]+)?$ ]] || ! [[ "$time" =~ ^[0-9]+(\.[0-9]+)?$ ]]; then
-    echo "Error: Please enter valid numeric values."
-    exit 1
-fi
-
 # Calculate simple interest
-interest=$(echo "scale=2; ($principal * $rate * $time) / 100" | bc)
+# Formula: SI = (P * R * T) / 100
+interest=$(echo "scale=2; $principal * $rate * $time / 100" | bc)
 
-# Display result
+# Display the result
 echo ""
-echo "Calculation Results:"
-echo "  Principal Amount: $principal"
-echo "  Rate of Interest: $rate%"
-echo "  Time Period: $time years"
-echo "  Simple Interest: $interest"
+echo "--------------------------------"
+echo "Principal Amount : $principal"
+echo "Rate of Interest : $rate%"
+echo "Time Period      : $time years"
+echo "Simple Interest  : $interest"
+echo "--------------------------------"
