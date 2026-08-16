@@ -1,29 +1,40 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Simple Interest Calculator
-# This script calculates simple interest based on user input for principal, rate of interest, and time period.
+# simple-interest.sh
+# A Bash script that calculates simple interest based on user input.
+# The formula used: Simple Interest = (Principal * Rate * Time) / 100
 
-echo "Simple Interest Calculator"
-echo "---------------------------"
+# Function to display a prompt and read a numeric value
+read_number() {
+    local prompt="$1"
+    local var
+    while true; do
+        read -rp "$prompt" var
+        # Check if input is a valid positive number (integer or float)
+        if [[ "$var" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+            echo "$var"
+            return
+        else
+            echo "Invalid input. Please enter a positive numeric value."
+        fi
+    done
+}
 
-# Read principal amount
-read -p "Enter the principal amount (in dollars): " principal
-
-# Read rate of interest
-read -p "Enter the annual rate of interest (in %): " rate
-
-# Read time period in years
-read -p "Enter the time period (in years): " time
+# Read inputs from the user
+principal=$(read_number "Enter the principal amount: ")
+rate=$(read_number "Enter the rate of interest (in % per annum): ")
+time=$(read_number "Enter the time period (in years): ")
 
 # Calculate simple interest
-# Formula: SI = (P * R * T) / 100
-interest=$(echo "scale=2; $principal * $rate * $time / 100" | bc)
+interest=$(awk "BEGIN { printf \"%.2f\", ($principal * $rate * $time) / 100 }")
 
 # Display the result
-echo ""
-echo "--------------------------------"
-echo "Principal Amount : $principal"
-echo "Rate of Interest : $rate%"
-echo "Time Period      : $time years"
-echo "Simple Interest  : $interest"
-echo "--------------------------------"
+echo "----------------------------------------"
+echo "Principal:      $principal"
+echo "Rate of Interest: $rate %"
+echo "Time Period:    $time years"
+echo "----------------------------------------"
+echo "Simple Interest: $interest"
+echo "----------------------------------------"
+
+exit 0
