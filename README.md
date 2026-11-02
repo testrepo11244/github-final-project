@@ -1,32 +1,45 @@
-# Simple Interest Calculator
+# github-final-project
 
-Repository: **github-final-project**
+Simple Interest Calculator
 
-This repository contains a Bash script that calculates simple interest based on user‑provided values for principal, rate of interest, and time period. The script prompts the user for each input, validates the data, performs the calculation using the formula:
+This repository is the final project for Getting Started with Git and GitHub. It contains a small Bash calculator that computes simple interest from values entered by the user.
 
-```
-Simple Interest = (Principal × Rate × Time) / 100
-```
+## Project details
 
-and displays the result.
+- Project name: github-final-project
+- Purpose: calculate simple interest for a principal amount over a given time period
+- Main script: `simple-interest.sh`
+- Formula: `simple interest = (principal * rate * time) / 100`
 
-## How to use
+## What the calculator does
+
+The simple interest calculator asks for three inputs:
+
+1. Principal — the starting amount of money
+2. Rate of interest — the annual interest rate as a percentage
+3. Time period — how long the money is invested or borrowed, in years
+
+It then prints the simple interest and the total amount (principal plus interest).
+
+## How to run
 
 ```bash
 chmod +x simple-interest.sh
 ./simple-interest.sh
 ```
 
-Follow the prompts to enter the principal amount, the annual interest rate (in %), and the time period (in years). The script will output the calculated simple interest.
+Example:
 
-## Project Structure
+- Principal: 1000
+- Rate of interest: 5
+- Time period: 2
+- Simple interest: 100
+- Total amount: 1100
 
-- `README.md` – This file.  
-- `LICENSE` – Apache 2.0 license.  
-- `CODE_OF_CONDUCT` – Community conduct guidelines.  
-- `CONTRIBUTING.md` – Guidelines for contributing.  
-- `simple-interest.sh` – Bash script implementing the calculator.
+## Repository files
 
-## License
-
-This project is licensed under the Apache License 2.0 – see the `LICENSE` file for details.
+- `README.md` — project name and simple interest calculator details
+- `LICENSE` — Apache License 2.0
+- `CODE_OF_CONDUCT.md` — community standards
+- `CONTRIBUTING.md` — how to contribute
+- `simple-interest.sh` — Bash simple interest calculator
