@@ -1,33 +1,26 @@
 #!/usr/bin/env bash
-
-# simple-interest.sh
-# A Bash script that calculates simple interest based on user input.
-# Formula: Simple Interest = (Principal * Rate * Time) / 100
+# Simple interest calculator
+# simple interest = (principal * rate * time) / 100
 
 echo "Simple Interest Calculator"
-echo "--------------------------"
+echo "Enter the principal, rate of interest, and time period."
 
-# Prompt for principal amount
-read -p "Enter the principal amount: " principal
+read -r -p "Principal: " principal
+read -r -p "Rate of interest (percent per year): " rate
+read -r -p "Time period (years): " time
 
-# Prompt for annual rate of interest (in percent)
-read -p "Enter the rate of interest (in %): " rate
-
-# Prompt for time period (in years)
-read -p "Enter the time period (in years): " time
-
-# Validate numeric input
-if ! [[ "$principal" =~ ^[0-9]+([.][0-9]+)?$ ]] ||
-   ! [[ "$rate" =~ ^[0-9]+([.][0-9]+)?$ ]] ||
+if ! [[ "$principal" =~ ^[0-9]+([.][0-9]+)?$ ]] || \
+   ! [[ "$rate" =~ ^[0-9]+([.][0-9]+)?$ ]] || \
    ! [[ "$time" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
-    echo "Error: All inputs must be numeric."
-    exit 1
+  echo "Error: principal, rate of interest, and time period must be non-negative numbers."
+  exit 1
 fi
 
-# Calculate simple interest
-interest=$(echo "scale=2; $principal * $rate * $time / 100" | bc)
+interest=$(awk -v p="$principal" -v r="$rate" -v t="$time" 'BEGIN { printf "%.2f", (p * r * t) / 100 }')
+total=$(awk -v p="$principal" -v i="$interest" 'BEGIN { printf "%.2f", p + i }')
 
-echo "-----------------------------------"
-printf "Principal: %s\nRate: %s%%\nTime: %s years\n" "$principal" "$rate" "$time"
-echo "Simple Interest: $interest"
-echo "-----------------------------------"
+echo "Principal: $principal"
+echo "Rate of interest: $rate%"
+echo "Time period: $time years"
+echo "Simple interest: $interest"
+echo "Total amount: $total"
